@@ -171,7 +171,7 @@ async fn ready() {
 
     let proxy = proxy::new().identity(id_svc).run_with_test_env(env).await;
 
-    let client = client::http1(proxy.health, "localhost");
+    let client = client::http1(proxy.admin, "localhost");
 
     let ready = || async {
         client

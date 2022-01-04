@@ -280,6 +280,7 @@ async fn run(proxy: Proxy, mut env: TestEnv, random_ports: bool) -> Listening {
         env.put(app::env::ENV_INBOUND_LISTEN_ADDR, "127.0.0.1:0".to_owned());
         env.put(app::env::ENV_CONTROL_LISTEN_ADDR, "127.0.0.1:0".to_owned());
         env.put(app::env::ENV_ADMIN_LISTEN_ADDR, "127.0.0.1:0".to_owned());
+        env.put(app::env::ENV_HEALTH_LISTEN_ADDR, "127.0.0.1:0".to_owned());
     } else {
         let local_inbound = env
             .get(app::env::ENV_INBOUND_LISTEN_ADDR)

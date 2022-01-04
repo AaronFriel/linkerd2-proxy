@@ -192,7 +192,7 @@ impl Config {
             let identity = identity.receiver().server();
             let metrics = inbound.metrics();
             let policy = inbound_policies.clone();
-            info_span!("admin").in_scope(move || {
+            info_span!("health").in_scope(move || {
                 health.build(
                     bind_health,
                     policy,
@@ -360,6 +360,13 @@ impl App {
                             admin
                                 .serve
                                 .instrument(info_span!("admin", listen.addr = %admin.listen_addr)),
+                        );
+
+                        // Start the health server
+                        tokio::spawn(
+                            health
+                                .serve
+                                .instrument(info_span!("health", listen.addr = %health.listen_addr)),
                         );
 
                         // Kick off the identity so that the process can become ready.
